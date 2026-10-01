@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+instance/
+booking.db
+*.sqlite
+*.sqlite3
+.pytest_cache/
+.DS_Store

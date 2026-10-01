@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Register | BookSpace{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-sm p-4">
+            <h2 class="fw-bold">Create account</h2>
+            <p class="text-muted">Register to book shared resources.</p>
+            <form method="POST">
+                <div class="mb-3">
+                    <label class="form-label">Full Name</label>
+                    <input name="name" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input name="email" type="email" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input name="password" type="password" minlength="6" class="form-control" required>
+                </div>
+                <button class="btn btn-primary w-100">Create Account</button>
+            </form>
+            <p class="text-center mt-3 mb-0">
+                Already registered? <a href="{{ url_for('login') }}">Login</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

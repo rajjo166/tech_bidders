@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Login | BookSpace{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-sm p-4">
+            <h2 class="fw-bold">Welcome back</h2>
+            <p class="text-muted">Login to manage your bookings.</p>
+            <form method="POST">
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input name="email" type="email" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input name="password" type="password" class="form-control" required>
+                </div>
+                <button class="btn btn-primary w-100">Login</button>
+            </form>
+            <p class="text-center mt-3 mb-0">
+                Don't have an account? <a href="{{ url_for('register') }}">Register</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

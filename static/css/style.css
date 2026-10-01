@@ -1,0 +1,97 @@
+body {
+    background: #f5f7fb;
+    color: #1f2d3d;
+}
+
+.navbar-brand {
+    font-weight: 800;
+    letter-spacing: .3px;
+}
+
+.hero {
+    background: linear-gradient(135deg, #102a56, #1d4f91);
+    color: white;
+    border-radius: 22px;
+    padding: 55px 40px;
+}
+
+.resource-card {
+    border: 0;
+    border-radius: 18px;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.resource-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,.08);
+}
+
+.card {
+    border-radius: 16px;
+    border: 0;
+}
+
+.btn-primary {
+    background: #173d70;
+    border-color: #173d70;
+}
+
+.btn-primary:hover {
+    background: #102e56;
+    border-color: #102e56;
+}
+
+.page-title {
+    font-weight: 800;
+}
+
+.stat-card {
+    min-height: 130px;
+}
+
+.table td, .table th {
+    vertical-align: middle;
+}
+
+.status {
+    font-size: .8rem;
+    padding: .35rem .65rem;
+    border-radius: 999px;
+}
+
+.status-Pending { background: #fff3cd; color: #856404; }
+.status-Approved { background: #d1e7dd; color: #0f5132; }
+.status-Rejected { background: #f8d7da; color: #842029; }
+.status-Cancelled { background: #e2e3e5; color: #41464b; }
+
+
+.navbar-brand { letter-spacing: .2px; }
+
+@media (max-width: 767.98px) {
+    .hero {
+        padding: 38px 24px;
+        border-radius: 18px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .table {
+        font-size: .9rem;
+    }
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #173d70;
+    box-shadow: 0 0 0 .2rem rgba(23, 61, 112, .12);
+}
+
+.btn {
+    border-radius: 10px;
+}
+
+.card {
+    overflow: hidden;
+}

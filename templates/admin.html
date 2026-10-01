@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard | BookSpace{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="page-title">Admin Dashboard</h1>
+        <p class="text-muted">Manage resources, users and booking requests.</p>
+    </div>
+    <a href="{{ url_for('add_resource') }}" class="btn btn-primary">+ Add Resource</a>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
+        <div class="card shadow-sm p-4 stat-card">
+            <div class="text-muted">Resources</div>
+            <h2 class="fw-bold">{{ resources|length }}</h2>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm p-4 stat-card">
+            <div class="text-muted">Users</div>
+            <h2 class="fw-bold">{{ users|length }}</h2>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm p-4 stat-card">
+            <div class="text-muted">Bookings</div>
+            <h2 class="fw-bold">{{ bookings|length }}</h2>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm mb-4">
+    <div class="card-header bg-white py-3"><strong>Resources</strong></div>
+    <div class="table-responsive">
+        <table class="table mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Name</th><th>Type</th><th>Location</th><th>Capacity</th><th>Status</th><th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for r in resources %}
+                <tr>
+                    <td>{{ r.name }}</td>
+                    <td>{{ r.resource_type }}</td>
+                    <td>{{ r.location }}</td>
+                    <td>{{ r.capacity }}</td>
+                    <td>{{ "Active" if r.is_active else "Inactive" }}</td>
+                    <td class="d-flex gap-1">
+                        <a href="{{ url_for('edit_resource', resource_id=r.id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
+                        <form method="POST" action="{{ url_for('delete_resource', resource_id=r.id) }}">
+                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-header bg-white py-3"><strong>Booking Requests</strong></div>
+    <div class="table-responsive">
+        <table class="table mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>User</th><th>Resource</th><th>Date</th><th>Time</th><th>Status</th><th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for b in bookings %}
+                <tr>
+                    <td>{{ b.user.name }}<br><small>{{ b.user.email }}</small></td>
+                    <td>{{ b.resource.name }}</td>
+                    <td>{{ b.booking_date.strftime("%d %b %Y") }}</td>
+                    <td>{{ b.start_time.strftime("%I:%M %p") }} - {{ b.end_time.strftime("%I:%M %p") }}</td>
+                    <td><span class="status status-{{ b.status }}">{{ b.status }}</span></td>
+                    <td>
+                        {% if b.status == "Pending" %}
+                        <div class="d-flex gap-1">
+                            <form method="POST" action="{{ url_for('booking_action', booking_id=b.id, action='approve') }}">
+                                <button class="btn btn-sm btn-success">Approve</button>
+                            </form>
+                            <form method="POST" action="{{ url_for('booking_action', booking_id=b.id, action='reject') }}">
+                                <button class="btn btn-sm btn-outline-danger">Reject</button>
+                            </form>
+                        </div>
+                        {% else %}
+                            <form method="POST" action="{{ url_for('cancel_booking', booking_id=b.id) }}">
+                                {% if b.status != "Cancelled" %}
+                                <button class="btn btn-sm btn-outline-secondary">Cancel</button>
+                                {% endif %}
+                            </form>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr><td colspan="6" class="text-center py-4 text-muted">No booking requests.</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
